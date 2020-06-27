@@ -1,0 +1,21 @@
+{% extends "security/base.html" %}
+{% from "security/_macros.html" import render_field_with_errors, render_field, render_field_errors, render_field_with_errors_no_labels %}
+{% block content %}
+<form class="form-signin" action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+  {% include "security/_messages.html" %}
+  {{ login_user_form.hidden_tag() }}
+  <img class="mb-4" src="{{ url_for('static', filename='img/bootstrap-solid.svg') }}" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">{{ _('Login') }}</h1>
+  {{ render_field_with_errors_no_labels(login_user_form.email, class_="form-control", placeholder="Email address") }}
+  {{ render_field_with_errors_no_labels(login_user_form.password,class_="form-control", placeholder="Password") }}
+  <div class="checkbox mb-3">
+    <label>
+      {{ render_field_with_errors_no_labels(login_user_form.remember) }}  Remember me
+    </label>
+  </div>
+  {{ render_field_errors(login_user_form.csrf_token) }}
+  {{ render_field(login_user_form.submit,class="btn btn-lg btn-secondary btn-block" ) }}
+  <hr/>
+  {% include "security/_menu.html" %}
+</form>
+{% endblock %}
