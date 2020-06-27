@@ -77,7 +77,7 @@ security = Security(app, user_datastore,register_form=ExtendedRegisterForm)
 # @app.before_first_request
 # def create_user():
 #     db.create_all()
-#     user_datastore.create_user(email="jsd784@yahoo.com", password=hash_password("mnbvcxZ1"),firstname="Jasvir",lastname="Dhillon")
+#     user_datastore.create_user(email="jsd784@yahoo.com", password=hash_password("yourpassword"),firstname="Jasvir",lastname="Dhillon")
 #     db.session.commit()
 
 # Views
