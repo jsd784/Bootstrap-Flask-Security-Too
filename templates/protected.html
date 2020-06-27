@@ -11,10 +11,10 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="/protected">Protected</a>
         </li>
       </ul>
@@ -28,7 +28,7 @@
         <h1 class="display-4">Hello, {{ name }}!</h1>
         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
         <hr class="my-4">
-        <p>This is using auth_required decorator. Role assignment is not checked.</p>
+        <p>This is using roles_required decorator. Admin role must be assigned to user to access this.</p>
         <a class="btn btn-secondary btn-lg" href="/logout" role="button">Log Out</a>
       </div>
     </div>

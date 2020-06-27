@@ -18,11 +18,11 @@
 {% macro render_field_errors(field) %}
   <p>
     {% if field and field.errors %}
-      <ul>
+      <div class="alert alert-danger" role="alert">
       {% for error in field.errors %}
-        <li>{{ error }}</li>
+        {{ error }}
       {% endfor %}
-      </ul>
+      </div>
     {% endif %}
   </p>
 {% endmacro %}

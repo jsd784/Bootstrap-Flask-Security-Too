@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, render_template
-from flask_security import Security, current_user, auth_required, hash_password, \
+from flask_security import Security, current_user, auth_required,roles_required, hash_password, \
                             SQLAlchemySessionUserDatastore, UserMixin, RoleMixin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
@@ -19,9 +19,10 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", 'r-p0L-3zrfuEksIvwV1GVbf
 # Generate a good salt using: secrets.SystemRandom().getrandbits(128)
 app.config['SECURITY_PASSWORD_SALT'] = os.environ.get("SECURITY_PASSWORD_SALT", '291968833846239932315041384143203481776')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/test.db'
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_pre_ping": True,
-}
+
+#User Behavior Config
+app.config['SECURITY_TRACKABLE'] = True
+
 # Create database connection object
 db = SQLAlchemy(app)
 
@@ -68,7 +69,7 @@ app.config['MAIL_DEFAULT_SENDER'] = "no-reply@pacificasolutions.com"
 mail = Mail(app)
 
 # Setup Flask-Security
-user_datastore = SQLAlchemySessionUserDatastore(db.session(), User, Role)
+user_datastore = SQLAlchemySessionUserDatastore(db.session, User, Role)
 security = Security(app, user_datastore,register_form=ExtendedRegisterForm)
 
 
@@ -83,7 +84,13 @@ security = Security(app, user_datastore,register_form=ExtendedRegisterForm)
 @app.route("/")
 @auth_required()
 def home():
-    return render_template("index.html",email=current_user.firstname)
+    return render_template("index.html",name=current_user.firstname)
+
+# Views
+@app.route("/protected")
+@roles_required('admin')
+def protected():
+    return render_template("protected.html",name=current_user.firstname)
 
 if __name__ == '__main__':
     app.run(debug=True)
