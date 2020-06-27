@@ -22,6 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/test.db'
 
 #User Behavior Config
 app.config['SECURITY_TRACKABLE'] = True
+app.config['SECURITY_CHANGEABLE'] = True
 
 # Create database connection object
 db = SQLAlchemy(app)
