@@ -60,11 +60,11 @@ class User(db.Model, UserMixin):
 # Configure Mail SMTP object
 app.config['SECURITY_REGISTERABLE'] = True
 app.config['SECURITY_RECOVERABLE'] = True
-app.config['MAIL_SERVER'] = "mail.pacificasolutions.com"
+app.config['MAIL_SERVER'] = "smtp.sendgrid.net"
 app.config['MAIL_PORT'] = "465"
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = os.environ.get("GATOR_MAIL_USERNAME")
-app.config['MAIL_PASSWORD'] = os.environ.get("GATOR_MAIL_PASSWORD")
+app.config['MAIL_USERNAME'] = os.environ.get("AZURE_MAIL_USER")
+app.config['MAIL_PASSWORD'] = os.environ.get("AZURE_MAIL_PASS")
 app.config['MAIL_DEFAULT_SENDER'] = "no-reply@pacificasolutions.com"
 
 mail = Mail(app)
